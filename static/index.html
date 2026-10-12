@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>WordFlow · Text Generator</title>
+  <meta name="description" content="WordFlow is a local language model project for continuing text with temperature and top-k sampling.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="WordFlow home">
+        <span class="brand-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <span>WordFlow</span>
+      </a>
+      <span class="header-label">Local language model</span>
+    </header>
+    <main>
+      <div class="intro">
+        <span class="intro-tag">TEXT GENERATION PROJECT</span>
+        <h1>Find the next words</h1>
+        <p>Enter a starting sentence and see how the model continues it. Change the settings to explore different results.</p>
+      </div>
+      <div class="workspace">
+        <section class="panel input-panel" aria-labelledby="prompt-heading">
+          <div class="panel-heading"><div><span class="section-label">YOUR INPUT</span><h2 id="prompt-heading">Start with a prompt</h2></div></div>
+          <form id="generator-form">
+            <label class="field-label" for="prompt">Prompt</label>
+            <textarea id="prompt" name="prompt" rows="5" maxlength="2000" required>Every effort moves you</textarea>
+            <p class="field-help">The model reads the last 256 tokens of your prompt.</p>
+            <div class="settings-heading"><h3>Generation settings</h3><span>Fine-tune the response</span></div>
+            <div class="controls">
+              <div class="control"><label for="tokens">New tokens <output id="tokens-value">30</output></label><input id="tokens" type="range" min="1" max="100" value="30"><small>Length of the continuation</small></div>
+              <div class="control"><label for="temperature">Temperature <output id="temperature-value">0.8</output></label><input id="temperature" type="range" min="0" max="2" step="0.1" value="0.8"><small>0 is predictable; higher is more varied</small></div>
+              <div class="control"><label for="top-k">Top-k <output id="top-k-value">25</output></label><input id="top-k" type="range" min="1" max="100" value="25"><small>Number of candidate tokens per step</small></div>
+              <div class="control seed"><label for="seed">Seed <span class="optional">Optional</span></label><input id="seed" type="number" step="1" placeholder="e.g. 123"><small>Use the same seed to repeat a result</small></div>
+            </div>
+            <button id="generate-button" type="submit">Generate text <span aria-hidden="true">→</span></button>
+          </form>
+        </section>
+        <section class="panel output-panel" aria-labelledby="output-heading">
+          <div class="panel-heading"><div><span class="section-label">YOUR RESULT</span><h2 id="output-heading">Generated text</h2></div><span class="result-indicator" aria-hidden="true"></span></div>
+          <div id="result" class="result" aria-live="polite"><p class="empty">Your generated text will appear here.</p></div>
+          <div class="output-footer"><span id="status">Ready to generate</span><button id="copy-button" class="copy" type="button" disabled>Copy text</button></div>
+        </section>
+      </div>
+      <p class="model-note"><strong>About this model</strong> · This 163M-parameter GPT model was trained on <em>The Verdict</em>, a short story. Its small training set means the text may be repetitive or imperfect.</p>
+    </main>
+    <footer>WordFlow · Local text generation</footer>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
